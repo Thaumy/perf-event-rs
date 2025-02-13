@@ -60,14 +60,16 @@ pub fn new<'t>(
         __reserved_2: 0,
         #[cfg(feature = "linux-5.5")]
         aux_sample_size: 0, // not use in counting mode
-        #[cfg(feature = "linux-5.5")]
-        __reserved_3: 0,
+        //#[cfg(feature = "linux-5.5")]
+        //__reserved_3: 0,
         #[cfg(feature = "linux-5.13")]
         sig_data: 0, // not use in counting mode
 
         // TODO: https://github.com/torvalds/linux/commit/09519ec3b19e4144b5f6e269c54fbb9c294a9fcb
         #[cfg(feature = "linux-6.3")]
         config3: 0,
+
+        ..Default::default() // TODO: skipped `__reserved_3` to build on 6.13 kernel
     });
 
     perf_event_attr.set_disabled(1);
